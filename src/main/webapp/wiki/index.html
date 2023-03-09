@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>API Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        td, th {
+            border: 1px solid black;
+            padding: 10px;
+        }
+    </style>
+
+</head>
+<body>
+<header>
+    <h1>Team T API Documentation</h1>
+    <nav>
+        <ul>
+            <li><a href="#introduction">Introduction</a></li>
+            <li><a href="#endpoints">Endpoints</a></li>
+            <li><a href="#reqbody">Request Body and Response Formats</a></li>
+            <li><a href="#errors">Errors</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <section id="introduction">
+        <h2>Introduction</h2>
+        <p>This is the documentation for Team T.</p>
+        <p>Here you will find information about the API's endpoints, how to authenticate requests, and what to do if an error occurs.</p>
+    </section>
+    <section id="endpoints">
+        <h2>Endpoints</h2>
+        <p>Here is a list of the API's endpoints:</p>
+        <table>
+            <tr>
+                <th>Method</th>
+                <th>URL</th>
+                <th>Request Body(JSON)</th>
+                <th>Response(JSON)</th>
+                <th>Error(e)</th>
+            </tr>
+            <tr>
+                <td>GET</td>
+                <td>/api/users</td>
+                <td></td>
+                <td>[user, user, ...] (1)</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>GET</td>
+                <td>/api/users/{id} <br> <code>id: A user ID</code></td>
+                <td></td>
+                <td>user (1)</td>
+                <td>(e1)</td>
+            </tr>
+            <tr>
+                <td>POST</td>
+                <td>/api/users</td>
+                <td>user(1) without id</td>
+                <td></td>
+                <td>(e2)</td>
+            </tr>
+
+        </table>
+
+
+    </section>
+    <section id="reqbody">
+        <h2>Request Body and Response Formats</h2>
+        <p>(1) User format (don’t provide ID, for POST)</p>
+        <ul>
+            <code>"{</code><br>
+            <code>"age": Number,</code><br>
+            <code>"name": String,</code><br>
+            <code>"gender": String [“male” | “Female”],</code><br>
+            <code>"email": String (email)</code><br>
+            <code>}</code><br>
+        </ul>
+    </section>
+
+    <section id="errors">
+        <h2>Errors</h2>
+        <p>If an error occurs while making a request to the API, an error response will be returned.</p>
+        <p>The error response will include an error code and message that can be used to diagnose the issue.</p>
+        <p>Here is a list of possible error codes:</p>
+        <ul>
+            <li><code>(e1): 404 Not Found</code>: No content found for this request</li>
+            <li><code>(e2): 400 Bad Request</code>: Field ‘xxx’ is required</li>
+
+        </ul>
+    </section>
+</main>
+<footer>
+    <p>All your requests are belong to us!</p>
+</footer>
+</body>
+</html>

@@ -1,6 +1,8 @@
 package entities;
 
 import javax.persistence.*;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "Person", indexes = {
@@ -17,6 +19,8 @@ public class Person {
     @JoinColumn(name = "Address_Address_id", nullable = false, referencedColumnName = "Address_id")
     private Address addressAddress;
 
+
+
     @Column(name = "Firstname", nullable = false, length = 45)
     private String firstname;
 
@@ -25,6 +29,31 @@ public class Person {
 
     @Column(name = "email", nullable = false, length = 45)
     private String email;
+
+    @OneToMany(mappedBy = "person", orphanRemoval = true)
+    private Set<Phone> phones = new LinkedHashSet<>();
+
+    @ManyToMany
+    @JoinTable(name = "Hobby_person",
+            joinColumns = @JoinColumn(name = "Person_id"),
+            inverseJoinColumns = @JoinColumn(name = "Hobby_id"))
+    private Set<Hobby> hobbies = new LinkedHashSet<>();
+
+    public Set<Hobby> getHobbies() {
+        return hobbies;
+    }
+
+    public void setHobbies(Set<Hobby> hobbies) {
+        this.hobbies = hobbies;
+    }
+
+    public Set<Phone> getPhones() {
+        return phones;
+    }
+
+    public void setPhones(Set<Phone> phones) {
+        this.phones = phones;
+    }
 
     public String getEmail() {
         return email;

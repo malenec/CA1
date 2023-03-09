@@ -1,6 +1,7 @@
 package entities;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Address", indexes = {
@@ -47,4 +48,16 @@ public class Address {
         this.cityinfoZipcode = cityinfoZipcode;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Address address = (Address) o;
+        return id != null && Objects.equals(id, address.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

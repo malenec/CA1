@@ -11,7 +11,7 @@ import java.util.Objects;
 public class Phone {
     @Id
     @Column(name = "Number", nullable = false)
-    private Long id;
+    private Long number;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "Person_id", nullable = false, referencedColumnName = "Person_id")
@@ -19,6 +19,14 @@ public class Phone {
 
     @Column(name = "description", nullable = false, length = 45)
     private String description;
+
+    public Phone() {
+    }
+
+    public Phone(Long number, String description) {
+        this.number = number;
+        this.description = description;
+    }
 
     public String getDescription() {
         return description;
@@ -32,8 +40,17 @@ public class Phone {
         return person;
     }
 
-    public void setPerson(Person person) {
+    public void addPerson(Person person) {
         this.person = person;
+        person.addPhone(this);
+    }
+
+    public Long getNumber() {
+        return number;
+    }
+
+    public void setNumber(Long number) {
+        this.number = number;
     }
 
     @Override
@@ -41,7 +58,7 @@ public class Phone {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Phone phone = (Phone) o;
-        return id != null && Objects.equals(id, phone.id);
+        return number != null && Objects.equals(number, phone.number);
     }
 
     @Override

@@ -28,12 +28,23 @@ public class Hobby {
     @ManyToMany(mappedBy = "hobbies")
     private Set<Person> persons = new LinkedHashSet<>();
 
+    public Hobby() {
+    }
+
+    public Hobby(String name, String wikiLink, String category, String type) {
+        this.name = name;
+        this.wikiLink = wikiLink;
+        this.category = category;
+        this.type = type;
+    }
+
     public Set<Person> getPersons() {
         return persons;
     }
 
-    public void setPersons(Set<Person> persons) {
-        this.persons = persons;
+    public void addPerson(Person person) {
+        this.persons.add(person);
+        person.addHobby(this);
     }
 
     public String getType() {
@@ -70,10 +81,6 @@ public class Hobby {
 
     public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     @Override

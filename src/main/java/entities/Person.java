@@ -2,6 +2,7 @@ package entities;
 
 import javax.persistence.*;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -13,13 +14,7 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Person_id", nullable = false)
-    private Long id;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "Address_Address_id", nullable = false, referencedColumnName = "Address_id")
-    private Address addressAddress;
-
-
+    private Long person_id;
 
     @Column(name = "Firstname", nullable = false, length = 45)
     private String firstname;
@@ -39,20 +34,43 @@ public class Person {
             inverseJoinColumns = @JoinColumn(name = "Hobby_id"))
     private Set<Hobby> hobbies = new LinkedHashSet<>();
 
+    @ManyToOne
+    @JoinColumn(name = "Address_id")
+    private Address address;
+
+    public Person() {
+    }
+
+    public Person(String firstname, String lastname, String email) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void addAddress(Address address) {
+        this.address = address;
+        address.addPerson(this);
+    }
+
     public Set<Hobby> getHobbies() {
         return hobbies;
     }
 
-    public void setHobbies(Set<Hobby> hobbies) {
-        this.hobbies = hobbies;
+    public void addHobby(Hobby hobby) {
+        this.hobbies.add(hobby);
+        hobby.addPerson(this);
     }
 
     public Set<Phone> getPhones() {
         return phones;
     }
 
-    public void setPhones(Set<Phone> phones) {
-        this.phones = phones;
+    public void addPhone(Phone phone) {
+        this.phones.add(phone);
     }
 
     public String getEmail() {
@@ -79,12 +97,20 @@ public class Person {
         this.firstname = firstname;
     }
 
-    public Address getAddressAddress() {
-        return addressAddress;
+    public Long getPerson_id() {
+        return person_id;
     }
 
-    public void setAddressAddress(Address addressAddress) {
-        this.addressAddress = addressAddress;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return person_id != null && Objects.equals(person_id, person.person_id);
     }
 
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

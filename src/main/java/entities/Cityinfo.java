@@ -9,15 +9,21 @@ import java.util.Set;
 public class Cityinfo {
     @Id
     @Column(name = "ZipCode", nullable = false)
-    private Long id;
-
-
+    private Long zipCode;
 
     @Column(name = "City", nullable = false, length = 45)
     private String city;
 
     @OneToMany(mappedBy = "cityinfoZipcode", orphanRemoval = true)
     private Set<Address> addresses = new LinkedHashSet<>();
+
+    public Cityinfo() {
+    }
+
+    public Cityinfo(Long zipCode, String city) {
+        this.zipCode = zipCode;
+        this.city = city;
+    }
 
     public Set<Address> getAddresses() {
         return addresses;
@@ -35,11 +41,8 @@ public class Cityinfo {
         this.city = city;
     }
 
-    public Long getId() {
-        return id;
+    public Long getZipCode() {
+        return zipCode;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 }

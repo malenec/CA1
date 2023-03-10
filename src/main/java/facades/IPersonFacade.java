@@ -7,6 +7,9 @@ import entities.Hobby;
 import java.util.List;
 
 public interface IPersonFacade {
+
+    public PersonDTO getPersonById(int id);
+
     //US1
     public PersonDTO getPersonByPhoneNumber(String number);
 

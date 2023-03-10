@@ -6,6 +6,12 @@ import dtos.ZipCodeDTO;
 import java.util.List;
 
 public class PersonFacade implements IPersonFacade{
+
+    @Override
+    public PersonDTO getPersonById(int id) {
+        return null;
+    }
+
     @Override
     public PersonDTO getPersonByPhoneNumber(String number) {
         return null;

@@ -9,6 +9,7 @@ import java.util.List;
 public interface IHobbyFacade {
 
     public List<HobbyDTO> getAllHobbies();
+
     public HobbyDTO getHobbyById(int hobbyId);
 
     //US2

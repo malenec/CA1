@@ -43,24 +43,115 @@
             </tr>
             <tr>
                 <td>GET</td>
-                <td>/api/users</td>
+                <td>/api/person</td>
                 <td></td>
-                <td>[user, user, ...] (1)</td>
+                <td>[person, person, ...] (1b)</td>
+                <td>(e1) <br> (e3</td>
+            </tr>
+            <tr>
+                <td>GET</td>
+                <td>/api/person/{id} <br> <code>id: A person ID</code></td>
+                <td></td>
+                <td>user (1)</td>
+                <td>(e1) <br> (e3)</td>
+            </tr>
+            <tr>
+                <td>PUT</td>
+                <td>/api/person</td>
+                <td>person(1a) without id</td>
+                <td></td>
+                <td>(e2) <br> (e3)</td>
+            </tr>
+            <tr>
+                <td>POST</td>
+                <td>/api/person/addHobby/{person_id, hobby_id} <br> <code>Id: A person ID and hobby ID</code></td>
+                <td></td>
+                <td></td>
+                <td>(e2) <br> (e3)</td>
+            </tr>
+            <tr>
+                <td>Delete</td>
+                <td>/api/person/delete/{id} <br> <code>id: A person ID</code></td>
+                <td></td>
+                <td></td>
+                <td>(e2) <br> (e3)</td>
+            </tr>
+            <tr>
+                <td>Delete</td>
+                <td>/api/person/deleteHobby/{person_id, hobby_id} <br> <code>Id: A person ID and hobby ID</code></td>
+                <td></td>
+                <td></td>
+                <td>(e2) <br> (e3)</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
                 <td></td>
             </tr>
             <tr>
                 <td>GET</td>
-                <td>/api/users/{id} <br> <code>id: A user ID</code></td>
+                <td>/api/hobby/</td>
                 <td></td>
-                <td>user (1)</td>
-                <td>(e1)</td>
+                <td>[hobby, hobby, …] (4b)</td>
+                <td>(e1) <br> (e3)</td>
             </tr>
             <tr>
-                <td>POST</td>
-                <td>/api/users</td>
-                <td>user(1) without id</td>
+                <td>GET</td>
+                <td>/api/hobby/all/{id} <br> <code>Id: A hobby ID</code></td>
                 <td></td>
-                <td>(e2)</td>
+                <td>[person, person, ...](1b)</td>
+                <td>(e1) <br> (e3)</td>
+            </tr>
+            <tr>
+                <td>GET</td>
+                <td>/api/hobby/count/{id} <br> <code>Id: A hobby ID</code></td>
+                <td></td>
+                <td>[hobby, hobby, ...](1b)</td>
+                <td>(e1) <br> (e3)</td>
+            </tr>
+            <tr>
+                <td>GET</td>
+                <td>/api/hobby/{id} <br> <code>Id: A hobby ID</code></td>
+                <td></td>
+                <td>Hobby (4b)</td>
+                <td>(e1) <br> (e3)</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>GET</td>
+                <td>/api/city</td>
+                <td></td>
+                <td>[zipcode, zipcode, ...](3)</td>
+                <td>(e1) <br> (e3)</td>
+            </tr>
+            <tr>
+                <td>GET</td>
+                <td>/api/city/{id} <code>Id: A zipCode ID</code></td>
+                <td></td>
+                <td>[person, person, ...](1b)</td>
+                <td>(e1) <br> (e3)</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>GET</td>
+                <td>/api/phone/{id} <code>Id: A phone number </code></td>
+                <td></td>
+                <td>[person, person, ...](1b)</td>
+                <td>(e1) <br> (e3)</td>
             </tr>
 
         </table>
@@ -69,15 +160,87 @@
     </section>
     <section id="reqbody">
         <h2>Request Body and Response Formats</h2>
-        <p>(1) User format (don’t provide ID, for POST)</p>
+        <p>(1a) Person format</p>
         <ul>
             <code>"{</code><br>
-            <code>"age": Number,</code><br>
-            <code>"name": String,</code><br>
-            <code>"gender": String [“male” | “Female”],</code><br>
+            <code>"firstname": String,</code><br>
+            <code>"lastname": String,</code><br>
             <code>"email": String (email)</code><br>
             <code>}</code><br>
         </ul>
+        <p>(1b) Person format</p>
+        <ul>
+            <code>"{</code><br>
+            <code>"person_id": int,</code><br>
+            <code>"firstname": String,</code><br>
+            <code>"lastname": String,</code><br>
+            <code>"email": String (email),</code><br>
+            <code>"Address": Address,</code><br>
+            <code>"Hobbies": Set Hobby,</code><br>
+            <code>"Phones": Set Phone </code><br>
+            <code>}</code><br>
+        </ul>
+        <p>(2a) Address format</p>
+        <ul>
+            <code>"{</code><br>
+            <code>"address_id": int,</code><br>
+            <code>"street": String,</code><br>
+            <code>"additionalInfo": String,</code><br>
+            <code>"zipCode": ZipCode</code><br>
+            <code>}</code><br>
+        </ul>
+        <p>(2b) Address format</p>
+        <ul>
+            <code>"{</code><br>
+            <code>"address_id": int,</code><br>
+            <code>"street": String</code><br>
+            <code>"additionalInfo": String,</code><br>
+            <code>"zipCode": ZipCode</code><br>
+            <code>"Persons": Set Person</code><br>
+            <code>}</code><br>
+        </ul>
+        <p>(3) ZipCode format</p>
+        <ul>
+            <code>"{</code><br>
+            <code>"zipCode": int,</code><br>
+            <code>"city": String</code><br>
+            <code>}</code><br>
+        </ul>
+        <p>(4a) Hobby format</p>
+        <ul>
+            <code>"{</code><br>
+            <code>"name": String,</code><br>
+            <code>"wikiLink": String,</code><br>
+            <code>"category": String,</code><br>
+            <code>"type": String</code><br>
+            <code>}</code><br>
+        </ul>
+        <p>(4b) Hobby format</p>
+        <ul>
+            <code>"{</code><br>
+            <code>"name": String,</code><br>
+            <code>"wikiLink": String,</code><br>
+            <code>"category": String,</code><br>
+            <code>"type": String</code><br>
+            <code>"Persons": Set Person</code><br>
+            <code>}</code><br>
+        </ul>
+        <p>(5a) Phone format</p>
+        <ul>
+            <code>"{</code><br>
+            <code>"number": int,</code><br>
+            <code>"description": String,</code><br>
+            <code>}</code><br>
+        </ul>
+        <p>(5b) Phone format</p>
+        <ul>
+            <code>"{</code><br>
+            <code>"number": int,</code><br>
+            <code>"description": String,</code><br>
+            <code>"Person": Person,</code><br>
+            <code>}</code><br>
+        </ul>
+
     </section>
 
     <section id="errors">
@@ -86,8 +249,9 @@
         <p>The error response will include an error code and message that can be used to diagnose the issue.</p>
         <p>Here is a list of possible error codes:</p>
         <ul>
-            <li><code>(e1): 404 Not Found</code>: No content found for this request</li>
-            <li><code>(e2): 400 Bad Request</code>: Field ‘xxx’ is required</li>
+            <li><code>(e1) :{ status : 404, "msg": "No content found for this request" }</code></li>
+            <li><code>(e2) :{ status : 400, "msg": "Field ‘xxx’ is required" } (for example, no name provided)</code></li>
+            <li><code>(e3) :{ status : 500, "msg": "Server error"}</code></li>
 
         </ul>
     </section>

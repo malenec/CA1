@@ -14,7 +14,7 @@ public class Cityinfo {
     @Column(name = "City", nullable = false, length = 45)
     private String city;
 
-    @OneToMany(mappedBy = "cityinfoZipcode", orphanRemoval = true)
+    @OneToMany(mappedBy = "cityinfo", orphanRemoval = true)
     private Set<Address> addresses = new LinkedHashSet<>();
 
     public Cityinfo() {

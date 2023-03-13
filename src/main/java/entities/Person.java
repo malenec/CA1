@@ -25,7 +25,7 @@ public class Person {
     @Column(name = "email", nullable = false, length = 45)
     private String email;
 
-    @OneToMany(mappedBy = "person", orphanRemoval = true)
+    @OneToMany(mappedBy = "person", orphanRemoval = true, cascade = CascadeType.PERSIST)
     private Set<Phone> phones = new LinkedHashSet<>();
 
     @ManyToMany
@@ -34,7 +34,7 @@ public class Person {
             inverseJoinColumns = @JoinColumn(name = "Hobby_id"))
     private Set<Hobby> hobbies = new LinkedHashSet<>();
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "Address_id")
     private Address address;
 
@@ -81,19 +81,19 @@ public class Person {
         this.email = email;
     }
 
-    public String getLastname() {
+    public String getLastName() {
         return lastname;
     }
 
-    public void setLastname(String lastname) {
+    public void setLastName(String lastname) {
         this.lastname = lastname;
     }
 
-    public String getFirstname() {
+    public String getFirstName() {
         return firstname;
     }
 
-    public void setFirstname(String firstname) {
+    public void setFirstName(String firstname) {
         this.firstname = firstname;
     }
 

@@ -18,7 +18,7 @@ public class Address {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "cityinfo_ZipCode", nullable = false)
-    private Cityinfo cityinfoZipcode;
+    private Cityinfo cityinfo;
 
     @Column(name = "Street", nullable = false, length = 45)
     private String street;
@@ -33,10 +33,18 @@ public class Address {
     public Address() {
     }
 
-    public Address(Cityinfo cityinfoZipcode, String street, String additionalInfo) {
-        this.cityinfoZipcode = cityinfoZipcode;
+    public Address(String street, String additionalInfo, Cityinfo cityinfo) {
         this.street = street;
         this.additionalInfo = additionalInfo;
+        this.cityinfo = cityinfo;
+    }
+
+    public Address(String street, String additionalInfo, Long zipCode) {
+        this.street = street;
+        this.additionalInfo = additionalInfo;
+
+
+
     }
 
     public Set<Person> getPersons() {
@@ -63,12 +71,12 @@ public class Address {
         this.street = street;
     }
 
-    public Cityinfo getCityinfoZipcode() {
-        return cityinfoZipcode;
+    public Cityinfo getCityinfo() {
+        return cityinfo;
     }
 
-    public void setCityinfoZipcode(Cityinfo cityinfoZipcode) {
-        this.cityinfoZipcode = cityinfoZipcode;
+    public void setCityinfo(Cityinfo cityinfo) {
+        this.cityinfo = cityinfo;
     }
 
     public Long getAddress_id() {

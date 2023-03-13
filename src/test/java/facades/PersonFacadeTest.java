@@ -4,16 +4,21 @@ import dtos.AddressDTO;
 import dtos.CityinfoDTO;
 import dtos.PersonDTO;
 import dtos.PhoneDTO;
+import entities.Cityinfo;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import utils.EMF_Creator;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class PersonFacadeTest {
+
+    @PersistenceUnit (unitName = "puTest")
 
     private static EntityManagerFactory emf;
     private static PersonFacade personFacade;
@@ -22,6 +27,17 @@ class PersonFacadeTest {
     void setUp() {
         emf = EMF_Creator.createEntityManagerFactoryForTest();
         personFacade = PersonFacade.getPersonFacade(emf);
+
+        EntityManager em = emf.createEntityManager();
+        Cityinfo c = new Cityinfo(2800L,"Lyngby");
+        try {
+            em.getTransaction().begin();
+            em.createNamedQuery("Cityinfo.deleteAllRows").executeUpdate();
+            em.persist(c);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
     }
 
     @AfterEach
@@ -46,7 +62,6 @@ class PersonFacadeTest {
 
     @Test
     void addPerson() {
-
 
         AddressDTO addressDTO_1 = new AddressDTO("Højløkken", "46", 2800L);
         PhoneDTO phoneDTO_1 = new PhoneDTO(42752212L, "Home");

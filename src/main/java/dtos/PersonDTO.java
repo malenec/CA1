@@ -1,6 +1,8 @@
 package dtos;
 
+import entities.Address;
 import entities.Person;
+import entities.Phone;
 
 public class PersonDTO {
 
@@ -23,8 +25,8 @@ public class PersonDTO {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.addressDTO = new AddressDTO(addressDTO.getStreet(), addressDTO.getAdditionalInfo(), addressDTO.getZipCode());
-        this.phoneDTO = new PhoneDTO(phoneDTO.getNumber(), phoneDTO.getDescription());
+        this.addressDTO = addressDTO;
+        this.phoneDTO = phoneDTO;
     }
 
     public String getFirstName() {
@@ -65,5 +67,13 @@ public class PersonDTO {
 
     public void setPhoneDTO(PhoneDTO phoneDTO) {
         this.phoneDTO = phoneDTO;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

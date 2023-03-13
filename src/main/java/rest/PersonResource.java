@@ -29,7 +29,7 @@ public class PersonResource{
     @Consumes({MediaType.APPLICATION_JSON})
     public Response postPerson(String input){
         PersonDTO personDTO = GSON.fromJson(input, PersonDTO.class);
-        System.out.println(personDTO);
+        FACADE.addPerson(personDTO);
         return Response.ok().entity(personDTO).build();
     }
 }

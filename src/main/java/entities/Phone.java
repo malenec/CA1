@@ -23,9 +23,10 @@ public class Phone {
     public Phone() {
     }
 
-    public Phone(Long number, String description) {
+    public Phone(Long number, String description, Person person) {
         this.number = number;
         this.description = description;
+        this.person = person;
     }
 
     public String getDescription() {

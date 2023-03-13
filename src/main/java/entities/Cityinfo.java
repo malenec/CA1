@@ -6,7 +6,11 @@ import java.util.Set;
 
 @Entity
 @Table(name = "cityinfo")
+@NamedQueries({
+        @NamedQuery(name = "Cityinfo.deleteAllRows", query = "delete from Cityinfo")
+})
 public class Cityinfo {
+
     @Id
     @Column(name = "ZipCode", nullable = false)
     private Long zipCode;
@@ -45,4 +49,8 @@ public class Cityinfo {
         return zipCode;
     }
 
+    @Override
+    public String toString() {
+        return zipCode + " " + city;
+    }
 }

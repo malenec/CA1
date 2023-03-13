@@ -39,13 +39,6 @@ public class Address {
         this.cityinfo = cityinfo;
     }
 
-    public Address(String street, String additionalInfo, Long zipCode) {
-        this.street = street;
-        this.additionalInfo = additionalInfo;
-
-
-
-    }
 
     public Set<Person> getPersons() {
         return persons;

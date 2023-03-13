@@ -59,33 +59,73 @@ public class PersonFacade implements IPersonFacade{
 
         EntityManager em = getEntityManager();
         Person p = new Person(person.getFirstName(), person.getLastName(), person.getEmail());
-        Address a = new Address(person.getAddressDTO().getStreet(), person.getAddressDTO().getAdditionalInfo(), person.getAddressDTO().getZipCode());
-        Phone ph = new Phone(person.getPhoneDTO().getNumber(), person.getPhoneDTO().getDescription());
-        p.addAddress(a);
-        p.addPhone(ph);
+
+        Cityinfo c = em.find(Cityinfo.class, person.getAddressDTO().getZipCode());
+//        Address a = new Address(person.getAddressDTO().getStreet(), person.getAddressDTO().getAdditionalInfo(), c);
+//        Phone ph = new Phone(person.getPhoneDTO().getNumber(), person.getPhoneDTO().getDescription(), p);
+//        p.addAddress(a);
+//        p.addPhone(ph);
+
         try {
             em.getTransaction().begin();
             em.persist(p);
+//            em.flush();
+
+
+
+//            em.merge(p);
+
             em.getTransaction().commit();
-        } finally {
+
+        }
+        finally {
+            em.close();
+        }
+
+        return new PersonDTO(p);
+
+    }
+
+    public PersonDTO addAddressFacade(Long id, PersonDTO person) {
+
+        EntityManager em = getEntityManager();
+        Person p = em.find(Person.class, id);
+        Cityinfo c = em.find(Cityinfo.class, person.getAddressDTO().getZipCode());
+        Address a = new Address(person.getAddressDTO().getStreet(), person.getAddressDTO().getAdditionalInfo(), c);
+        p.addAddress(a);
+
+        try {
+            em.getTransaction().begin();
+            em.merge(p);
+            em.getTransaction().commit();
+        }
+        finally {
             em.close();
         }
         return new PersonDTO(p);
 
     }
 
-    public RenameMeDTO create(RenameMeDTO rm){
-        RenameMe rme = new RenameMe(rm.getDummyStr1(), rm.getDummyStr2());
+    public PersonDTO addPhoneFacade(Long id, PersonDTO person) {
+
         EntityManager em = getEntityManager();
+        Person p = em.find(Person.class, id);
+        Phone ph = new Phone(person.getPhoneDTO().getNumber(), person.getPhoneDTO().getDescription(), p);
+        p.addPhone(ph);
+
         try {
             em.getTransaction().begin();
-            em.persist(rme);
+            em.merge(p);
             em.getTransaction().commit();
-        } finally {
+        }
+        finally {
             em.close();
         }
-        return new RenameMeDTO(rme);
+
+        return new PersonDTO(p);
+
     }
+
 
     @Override
     public PersonDTO updatePerson(PersonDTO person) {

@@ -65,6 +65,7 @@ public class PersonFacade implements IPersonFacade{
         Phone ph = new Phone(person.getPhoneDTO().getNumber(), person.getPhoneDTO().getDescription());
         ph.addPerson(p);
 
+
         try {
             em.getTransaction().begin();
             em.persist(a);

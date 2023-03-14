@@ -1,7 +1,7 @@
 package facades;
 
 import dtos.PersonDTO;
-import dtos.CityinfoDTO;
+import dtos.CityInfoDTO;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public interface IPersonFacade {
     public PersonDTO getPersonByPhoneNumber(String number);
 
     //US3
-    public List<PersonDTO> getPersonsByZipCode(CityinfoDTO zipCode);
+    public List<PersonDTO> getPersonsByZipCode(CityInfoDTO zipCode);
 
     //US6
     public PersonDTO addHobbyToPerson(PersonDTO person, int hobbyId);

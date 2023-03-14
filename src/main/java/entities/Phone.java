@@ -5,6 +5,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "Phone.deleteAllRows", query = "delete from Phone p")
+})
 public class Phone {
     @Id
     @Column(name = "number", nullable = false)

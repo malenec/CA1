@@ -20,7 +20,7 @@ class PersonFacadeTest {
     @PersistenceUnit (unitName = "puTest")
 
     private static EntityManagerFactory emf;
-//    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("puTest");
+
     private static PersonFacade personFacade;
 
     @BeforeEach
@@ -32,7 +32,12 @@ class PersonFacadeTest {
         CityInfo c = new CityInfo(2800L,"Lyngby");
         try {
             em.getTransaction().begin();
+
+            em.createNamedQuery("Phone.deleteAllRows").executeUpdate();
+            em.createNamedQuery("Person.deleteAllRows").executeUpdate();
+            em.createNamedQuery("Address.deleteAllRows").executeUpdate();
             em.createNamedQuery("CityInfo.deleteAllRows").executeUpdate();
+
             em.persist(c);
             em.getTransaction().commit();
         } finally {
@@ -44,21 +49,21 @@ class PersonFacadeTest {
     void tearDown() {
     }
 
-//    @Test
-//    void getPersonByPhoneNumber() {
-//    }
-//
-//    @Test
-//    void getPersonsByZipCode() {
-//    }
-//
-//    @Test
-//    void addHobbyToPerson() {
-//    }
-//
-//    @Test
-//    void deleteHobbyFromPerson() {
-//    }
+    @Test
+    void getPersonByPhoneNumber() {
+    }
+
+    @Test
+    void getPersonsByZipCode() {
+    }
+
+    @Test
+    void addHobbyToPerson() {
+    }
+
+    @Test
+    void deleteHobbyFromPerson() {
+    }
 
 
     @Test
@@ -72,11 +77,11 @@ class PersonFacadeTest {
 
     }
 
-//    @Test
-//    void updatePerson() {
-//    }
-//
-//    @Test
-//    void deletePerson() {
-//    }
+    @Test
+    void updatePerson() {
+    }
+
+    @Test
+    void deletePerson() {
+    }
 }

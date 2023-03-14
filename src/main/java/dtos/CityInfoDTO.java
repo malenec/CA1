@@ -1,11 +1,11 @@
 package dtos;
 
-public class CityinfoDTO {
+public class CityInfoDTO {
 
     private String city;
     private Long zipCode;
 
-    public CityinfoDTO(String city, Long zipCode) {
+    public CityInfoDTO(String city, Long zipCode) {
         this.city = city;
         this.zipCode = zipCode;
     }

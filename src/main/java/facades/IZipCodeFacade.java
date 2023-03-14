@@ -1,13 +1,13 @@
 package facades;
 
-import dtos.CityinfoDTO;
+import dtos.CityInfoDTO;
 
 import java.util.List;
 
 public interface IZipCodeFacade {
 
-    public CityinfoDTO getZipCodeById(int zipCodeId);
+    public CityInfoDTO getZipCodeById(int zipCodeId);
 
     //US5
-    public List<CityinfoDTO> getAllZipCodes();
+    public List<CityInfoDTO> getAllZipCodes();
 }

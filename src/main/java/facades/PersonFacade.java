@@ -1,7 +1,7 @@
 package facades;
 
 import dtos.PersonDTO;
-import dtos.CityinfoDTO;
+import dtos.CityInfoDTO;
 import entities.*;
 
 import javax.persistence.EntityManager;
@@ -39,7 +39,7 @@ public class PersonFacade implements IPersonFacade{
     }
 
     @Override
-    public List<PersonDTO> getPersonsByZipCode(CityinfoDTO zipCode) {
+    public List<PersonDTO> getPersonsByZipCode(CityInfoDTO zipCode) {
         return null;
     }
 

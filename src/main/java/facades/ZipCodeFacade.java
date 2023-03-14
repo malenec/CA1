@@ -1,17 +1,17 @@
 package facades;
 
-import dtos.CityinfoDTO;
+import dtos.CityInfoDTO;
 
 import java.util.List;
 
 public class ZipCodeFacade implements IZipCodeFacade{
     @Override
-    public CityinfoDTO getZipCodeById(int zipCodeId) {
+    public CityInfoDTO getZipCodeById(int zipCodeId) {
         return null;
     }
 
     @Override
-    public List<CityinfoDTO> getAllZipCodes() {
+    public List<CityInfoDTO> getAllZipCodes() {
         return null;
     }
 }

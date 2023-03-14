@@ -99,6 +99,11 @@ public class Person {
         return phones;
     }
 
+    public Phone getPhone() {
+        return this.phones.iterator().next();
+    }
+
+
     public void addPhone(Phone phone) {
         this.phones.add(phone);
 

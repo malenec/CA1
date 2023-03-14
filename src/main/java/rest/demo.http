@@ -1,8 +1,39 @@
-GET http://localhost:8080/devops_starter_war_exploded/api/xxx
+// getAllPersons
+GET http://localhost:8080/CA1/api/person
 
 ###
-POST http://localhost:8080/devops_starter_war_exploded/api/xxx
+POST http://localhost:8080/CA1/api/person
 Content-Type: application/json
 #User-Agent: Mozilla/5.0 (platform; rv:geckoversion) Gecko/geckotrail Firefox/firefoxversion
 
-{"str1": "First Property", "str2": "Second Property"}
+{
+    "firstName": "Malene2",
+    "lastName": "Christensen2",
+    "email": "malene2@gmail.com",
+    "addressDTO": {
+      "street": "Lyngbyvej2",
+      "additionalInfo": "46 2.tv2hej",
+      "zipCode": 2800
+    },
+    "phoneDTO": {
+      "number": 55555555,
+      "description": "Work2"
+    }
+}
+
+
+
+
+
+
+
+####
+#POST http://localhost:8080/devops_starter_war_exploded/api/xxx
+#Content-Type: application/json
+##User-Agent: Mozilla/5.0 (platform; rv:geckoversion) Gecko/geckotrail Firefox/firefoxversion
+#
+#{
+#  "str1": "First Property",
+#  "str2": "Second Property"
+#}
+#

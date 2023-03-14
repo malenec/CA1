@@ -20,7 +20,7 @@ public class CityInfo {
     @Column(name = "city", nullable = false, length = 45)
     private String city;
 
-    @OneToMany(mappedBy = "zipCode")
+    @OneToMany(mappedBy = "cityInfo")
     private Set<Address> addresses = new LinkedHashSet<>();
 
     public CityInfo() {

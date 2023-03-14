@@ -6,6 +6,7 @@ import entities.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class PersonFacade implements IPersonFacade{
@@ -86,5 +87,13 @@ public class PersonFacade implements IPersonFacade{
     @Override
     public PersonDTO deletePerson(Long id) {
         return null;
+    }
+
+    @Override
+    public List<PersonDTO> getAllPersons() {
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p", Person.class);
+        List<Person> persons = query.getResultList();
+        return PersonDTO.getDtos(persons);
     }
 }

@@ -29,7 +29,7 @@ public class Address {
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "zipCode", nullable = false)
-    private CityInfo zipCode;
+    private CityInfo cityInfo;
 
     @OneToMany(mappedBy = "address", cascade = CascadeType.PERSIST)
     private Set<Person> people = new LinkedHashSet<>();
@@ -37,10 +37,10 @@ public class Address {
     public Address() {
     }
 
-    public Address(String street, String additionalInfo, CityInfo zipCode) {
+    public Address(String street, String additionalInfo, CityInfo cityInfo) {
         this.street = street;
         this.additionalInfo = additionalInfo;
-        this.zipCode = zipCode;
+        this.cityInfo = cityInfo;
     }
 
     public Long getAddress_id() {
@@ -67,12 +67,12 @@ public class Address {
         this.additionalInfo = additionalInfo;
     }
 
-    public CityInfo getZipCode() {
-        return zipCode;
+    public CityInfo getCityInfo() {
+        return cityInfo;
     }
 
-    public void setZipCode(CityInfo zipCode) {
-        this.zipCode = zipCode;
+    public void setCityInfo(CityInfo cityInfo) {
+        this.cityInfo = cityInfo;
     }
 
     public Set<Person> getPeople() {

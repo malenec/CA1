@@ -2,6 +2,9 @@ package dtos;
 
 import entities.Person;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PersonDTO {
 
     private Long id;
@@ -17,6 +20,8 @@ public class PersonDTO {
         this.firstName = person.getFirstName();
         this.lastName = person.getLastName();
         this.email = person.getEmail();
+        this.addressDTO = new AddressDTO(person.getAddress().getStreet(), person.getAddress().getAdditionalInfo(), person.getAddress().getCityInfo().getZipCode());
+        this.phoneDTO = new PhoneDTO(person.getPhone().getNumber(), person.getPhone().getDescription());
     }       // Denne constructor tager ikke en adresse og en telefon med - den bruges når vi returnerer en person fra databasen efter at have add'et
 
     public PersonDTO(String firstName, String lastName, String email, AddressDTO addressDTO, PhoneDTO phoneDTO) {
@@ -26,6 +31,13 @@ public class PersonDTO {
         this.addressDTO = addressDTO;
         this.phoneDTO = phoneDTO;
     }
+
+    public static List<PersonDTO> getDtos(List<Person> persons) {
+        List<PersonDTO> personDtos = new ArrayList();
+        persons.forEach(person->personDtos.add(new PersonDTO(person)));
+        return personDtos;
+    }
+
 
     public String getFirstName() {
         return firstName;

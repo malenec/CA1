@@ -30,6 +30,8 @@ public interface IPersonFacade {
     //US10
     public PersonDTO deletePerson(Long id);
 
+    public List<PersonDTO> getAllPersons();
+
 
 
 }

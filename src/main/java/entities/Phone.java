@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 public class Phone {
     @Id
     @Column(name = "number", nullable = false)
-    private Long id;
+    private Long number;
 
     @Size(max = 45)
     @NotNull
@@ -26,17 +26,17 @@ public class Phone {
     public Phone() {
     }
 
-    public Phone(Long id, String description) {
-        this.id = id;
+    public Phone(Long number, String description) {
+        this.number = number;
         this.description = description;
     }
 
-    public Long getId() {
-        return id;
+    public Long getNumber() {
+        return number;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setNumber(Long number) {
+        this.number = number;
     }
 
     public String getDescription() {
@@ -55,5 +55,7 @@ public class Phone {
         this.person = person;
         person.addPhone(this);
     }
+
+
 
 }

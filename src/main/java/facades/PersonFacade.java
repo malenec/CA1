@@ -61,10 +61,9 @@ public class PersonFacade implements IPersonFacade{
         CityInfo c = em.find(CityInfo.class, person.getAddressDTO().getZipCode());
         Address a = new Address(person.getAddressDTO().getStreet(), person.getAddressDTO().getAdditionalInfo(), c);
         Person p = new Person(person.getFirstName(), person.getLastName(), person.getEmail());
-        p.addAddress(a);
         Phone ph = new Phone(person.getPhoneDTO().getNumber(), person.getPhoneDTO().getDescription());
+        p.addAddress(a);
         ph.addPerson(p);
-
 
         try {
             em.getTransaction().begin();

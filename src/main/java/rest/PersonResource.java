@@ -34,6 +34,6 @@ public class PersonResource {
         PersonDTO personDTO = GSON.fromJson(input, PersonDTO.class);
         FACADE.addPerson(personDTO);
         return Response.ok().entity(personDTO).build();
-
     }
+
 }

@@ -22,7 +22,7 @@ public class PersonDTO {
         this.email = person.getEmail();
         this.addressDTO = new AddressDTO(person.getAddress().getStreet(), person.getAddress().getAdditionalInfo(), person.getAddress().getCityInfo().getZipCode());
         this.phoneDTO = new PhoneDTO(person.getPhone().getNumber(), person.getPhone().getDescription());
-    }       // Denne constructor tager ikke en adresse og en telefon med - den bruges når vi returnerer en person fra databasen efter at have add'et
+    }
 
     public PersonDTO(String firstName, String lastName, String email, AddressDTO addressDTO, PhoneDTO phoneDTO) {
         this.firstName = firstName;

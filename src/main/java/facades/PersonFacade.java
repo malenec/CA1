@@ -77,7 +77,7 @@ public class PersonFacade implements IPersonFacade{
         }
 
         return new PersonDTO(p);
-    }    // Denne person indeholder ikke en adresse og en telefon - den bruger en constructor der kun sætter id, navn og mail
+    }
 
     @Override
     public PersonDTO updatePerson(PersonDTO person) {

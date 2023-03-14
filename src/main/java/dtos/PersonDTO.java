@@ -17,7 +17,7 @@ public class PersonDTO {
         this.firstName = person.getFirstName();
         this.lastName = person.getLastName();
         this.email = person.getEmail();
-    }
+    }       // Denne constructor tager ikke en adresse og en telefon med - den bruges når vi returnerer en person fra databasen efter at have add'et
 
     public PersonDTO(String firstName, String lastName, String email, AddressDTO addressDTO, PhoneDTO phoneDTO) {
         this.firstName = firstName;
@@ -26,7 +26,6 @@ public class PersonDTO {
         this.addressDTO = addressDTO;
         this.phoneDTO = phoneDTO;
     }
-
 
     public String getFirstName() {
         return firstName;

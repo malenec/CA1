@@ -28,12 +28,6 @@ public class Phone {
         this.description = description;
     }
 
-    public Phone(Long id, String description, Person person) {
-        this.id = id;
-        this.description = description;
-        this.person = person;
-    }
-
     public Long getId() {
         return id;
     }
@@ -55,7 +49,6 @@ public class Phone {
     }
 
     public void addPerson(Person person) {
-
         this.person = person;
         person.addPhone(this);
     }

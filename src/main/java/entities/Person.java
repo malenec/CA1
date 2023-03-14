@@ -88,7 +88,6 @@ public class Person {
     }
 
     public void addAddress(Address address) {
-
         this.address = address;
         address.addPerson(this);
     }
@@ -98,7 +97,6 @@ public class Person {
     }
 
     public void addPhone(Phone phone) {
-
         this.phones.add(phone);
 
     }

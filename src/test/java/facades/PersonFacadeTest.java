@@ -3,7 +3,6 @@ package facades;
 import dtos.AddressDTO;
 import dtos.PersonDTO;
 import dtos.PhoneDTO;
-import dtos.UserDTO;
 import entities.CityInfo;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,6 +20,7 @@ class PersonFacadeTest {
     @PersistenceUnit (unitName = "puTest")
 
     private static EntityManagerFactory emf;
+//    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("puTest");
     private static PersonFacade personFacade;
 
     @BeforeEach
@@ -44,27 +44,22 @@ class PersonFacadeTest {
     void tearDown() {
     }
 
-    @Test
-    void getPersonByPhoneNumber() {
-    }
+//    @Test
+//    void getPersonByPhoneNumber() {
+//    }
+//
+//    @Test
+//    void getPersonsByZipCode() {
+//    }
+//
+//    @Test
+//    void addHobbyToPerson() {
+//    }
+//
+//    @Test
+//    void deleteHobbyFromPerson() {
+//    }
 
-    @Test
-    void getPersonsByZipCode() {
-    }
-
-    @Test
-    void addHobbyToPerson() {
-    }
-
-    @Test
-    void deleteHobbyFromPerson() {
-    }
-
-    @Test
-    void addUser(){
-//        UserDTO user = new UserDTO("Malene", "Christensen", "malene@gmail.com","Højløkken", "46", 2800L,42752212L, "Home");
-//        assertEquals("Malene", personFacade.addUser(user).getFirstName());
-    }
 
     @Test
     void addPerson() {
@@ -77,11 +72,11 @@ class PersonFacadeTest {
 
     }
 
-    @Test
-    void updatePerson() {
-    }
-
-    @Test
-    void deletePerson() {
-    }
+//    @Test
+//    void updatePerson() {
+//    }
+//
+//    @Test
+//    void deletePerson() {
+//    }
 }

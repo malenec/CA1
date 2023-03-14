@@ -34,8 +34,6 @@ public class Address {
     public Address() {
     }
 
-
-
     public Address(String street, String additionalInfo, CityInfo zipCode) {
         this.street = street;
         this.additionalInfo = additionalInfo;
@@ -79,7 +77,6 @@ public class Address {
     }
 
     public void addPerson(Person person) {
-
         this.people.add(person);
     }
 

@@ -2,7 +2,6 @@ package facades;
 
 import dtos.PersonDTO;
 import dtos.CityinfoDTO;
-import dtos.UserDTO;
 
 import java.util.List;
 
@@ -24,8 +23,6 @@ public interface IPersonFacade {
 
     //US8
     public PersonDTO addPerson(PersonDTO person);
-
-    public UserDTO addUser(UserDTO user);
 
     //US9
     public PersonDTO updatePerson(PersonDTO person);

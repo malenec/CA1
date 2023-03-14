@@ -3,6 +3,7 @@ package facades;
 import dtos.PersonDTO;
 import dtos.CityinfoDTO;
 import dtos.RenameMeDTO;
+import dtos.UserDTO;
 import entities.*;
 
 import javax.persistence.EntityManager;
@@ -54,26 +55,55 @@ public class PersonFacade implements IPersonFacade{
         return null;
     }
 
+
     @Override
-    public PersonDTO addPerson(PersonDTO person) {
+    public UserDTO addUser(UserDTO user) {
 
         EntityManager em = getEntityManager();
-        Person p = new Person(person.getFirstName(), person.getLastName(), person.getEmail());
 
-        Cityinfo c = em.find(Cityinfo.class, person.getAddressDTO().getZipCode());
-//        Address a = new Address(person.getAddressDTO().getStreet(), person.getAddressDTO().getAdditionalInfo(), c);
-//        Phone ph = new Phone(person.getPhoneDTO().getNumber(), person.getPhoneDTO().getDescription(), p);
-//        p.addAddress(a);
-//        p.addPhone(ph);
+//        String firstName, String lastName, String email, String street, String addressAdditionalInfo, Long zipCode, Long phoneNumber, String phoneDescription
+
+        Person p = new Person(user.getFirstName(), user.getLastName(), user.getEmail());
+
+        CityInfo userCity = em.find(CityInfo.class, user.getZipCode());
+
+        p.addAddress(new Address(user.getStreet(), user.getAddressAdditionalInfo(), userCity));
+
+        p.addPhone(new Phone(user.getPhoneNumber(), user.getPhoneDescription()));
 
         try {
             em.getTransaction().begin();
             em.persist(p);
-//            em.flush();
+            em.getTransaction().commit();
+        }
+        finally {
+            em.close();
+        }
 
 
+        return user;
+    }
 
-//            em.merge(p);
+
+    @Override
+    public PersonDTO addPerson(PersonDTO person) {
+
+        EntityManager em = getEntityManager();
+
+        CityInfo c = em.find(CityInfo.class, person.getAddressDTO().getZipCode());
+        Address a = new Address(person.getAddressDTO().getStreet(), person.getAddressDTO().getAdditionalInfo(), c);
+        Person p = new Person(person.getFirstName(), person.getLastName(), person.getEmail());
+        p.addAddress(a);
+        Phone ph = new Phone(person.getPhoneDTO().getNumber(), person.getPhoneDTO().getDescription());
+
+        try {
+            em.getTransaction().begin();
+
+            em.persist(a);
+
+            ph.addPerson(p);
+
+            em.persist(p);
 
             em.getTransaction().commit();
 
@@ -82,7 +112,7 @@ public class PersonFacade implements IPersonFacade{
             em.close();
         }
 
-        return new PersonDTO(p);
+        return person;
 
     }
 
@@ -90,7 +120,7 @@ public class PersonFacade implements IPersonFacade{
 
         EntityManager em = getEntityManager();
         Person p = em.find(Person.class, id);
-        Cityinfo c = em.find(Cityinfo.class, person.getAddressDTO().getZipCode());
+        CityInfo c = em.find(CityInfo.class, person.getAddressDTO().getZipCode());
         Address a = new Address(person.getAddressDTO().getStreet(), person.getAddressDTO().getAdditionalInfo(), c);
         p.addAddress(a);
 

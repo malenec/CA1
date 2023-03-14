@@ -1,76 +1,78 @@
 package entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.LinkedHashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "Person", indexes = {
-        @Index(name = "fk_Person_Address1_idx", columnList = "Address_Address_id")
-})
 public class Person {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Person_id", nullable = false)
-    private Long person_id;
+    @Column(name = "person_id", nullable = false)
+    private Long id;
 
-    @Column(name = "Firstname", nullable = false, length = 45)
-    private String firstname;
+    @Size(max = 45)
+    @NotNull
+    @Column(name = "firstName", nullable = false, length = 45)
+    private String firstName;
 
-    @Column(name = "Lastname", nullable = false, length = 45)
-    private String lastname;
+    @Size(max = 45)
+    @NotNull
+    @Column(name = "lastName", nullable = false, length = 45)
+    private String lastName;
 
+    @Size(max = 45)
+    @NotNull
     @Column(name = "email", nullable = false, length = 45)
     private String email;
 
-    @OneToMany(mappedBy = "person", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "address_id", nullable = false)
+    private Address address;
+
+    @OneToMany(mappedBy = "person", cascade = CascadeType.PERSIST)
     private Set<Phone> phones = new LinkedHashSet<>();
 
     @ManyToMany
-    @JoinTable(name = "Hobby_person",
-            joinColumns = @JoinColumn(name = "Person_id"),
-            inverseJoinColumns = @JoinColumn(name = "Hobby_id"))
+    @JoinTable(name = "Hobby_Person",
+            joinColumns = @JoinColumn(name = "person_id"),
+            inverseJoinColumns = @JoinColumn(name = "hobby_id"))
     private Set<Hobby> hobbies = new LinkedHashSet<>();
-
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "Address_id")
-    private Address address;
 
     public Person() {
     }
 
-    public Person(String firstname, String lastname, String email) {
-        this.firstname = firstname;
-        this.lastname = lastname;
+    public Person(String firstName, String lastName, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
     }
 
-    public Address getAddress() {
-        return address;
+    public Long getId() {
+        return id;
     }
 
-    public void addAddress(Address address) {
-        this.address = address;
-        address.addPerson(this);
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Set<Hobby> getHobbies() {
-        return hobbies;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void addHobby(Hobby hobby) {
-        this.hobbies.add(hobby);
-        hobby.addPerson(this);
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public Set<Phone> getPhones() {
-        return phones;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void addPhone(Phone phone) {
-        this.phones.add(phone);
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -81,36 +83,32 @@ public class Person {
         this.email = email;
     }
 
-    public String getLastName() {
-        return lastname;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setLastName(String lastname) {
-        this.lastname = lastname;
+    public void addAddress(Address address) {
+
+        this.address = address;
+        address.addPerson(this);
     }
 
-    public String getFirstName() {
-        return firstname;
+    public Set<Phone> getPhones() {
+        return phones;
     }
 
-    public void setFirstName(String firstname) {
-        this.firstname = firstname;
+    public void addPhone(Phone phone) {
+
+        this.phones.add(phone);
+
     }
 
-    public Long getPerson_id() {
-        return person_id;
+    public Set<Hobby> getHobbies() {
+        return hobbies;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Person person = (Person) o;
-        return person_id != null && Objects.equals(person_id, person.person_id);
+    public void setHobbies(Set<Hobby> hobbies) {
+        this.hobbies = hobbies;
     }
 
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
 }

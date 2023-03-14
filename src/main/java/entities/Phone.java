@@ -1,32 +1,45 @@
 package entities;
 
 import javax.persistence.*;
-import java.util.Objects;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "Phone", indexes = {
-        @Index(name = "fk_Phone_Person1_idx", columnList = "Person_id"),
-        @Index(name = "Number_UNIQUE", columnList = "Number", unique = true)
-})
 public class Phone {
     @Id
-    @Column(name = "Number", nullable = false)
-    private Long number;
+    @Column(name = "number", nullable = false)
+    private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "Person_id", nullable = false, referencedColumnName = "Person_id")
-    private Person person;
-
+    @Size(max = 45)
+    @NotNull
     @Column(name = "description", nullable = false, length = 45)
     private String description;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "person_id", nullable = false)
+    private Person person;
 
     public Phone() {
     }
 
-    public Phone(Long number, String description, Person person) {
-        this.number = number;
+    public Phone(Long id, String description) {
+        this.id = id;
+        this.description = description;
+    }
+
+    public Phone(Long id, String description, Person person) {
+        this.id = id;
         this.description = description;
         this.person = person;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -42,28 +55,9 @@ public class Phone {
     }
 
     public void addPerson(Person person) {
+
         this.person = person;
         person.addPhone(this);
     }
 
-    public Long getNumber() {
-        return number;
-    }
-
-    public void setNumber(Long number) {
-        this.number = number;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Phone phone = (Phone) o;
-        return number != null && Objects.equals(number, phone.number);
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
 }

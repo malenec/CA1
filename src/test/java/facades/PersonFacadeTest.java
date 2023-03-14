@@ -1,10 +1,10 @@
 package facades;
 
 import dtos.AddressDTO;
-import dtos.CityinfoDTO;
 import dtos.PersonDTO;
 import dtos.PhoneDTO;
-import entities.Cityinfo;
+import dtos.UserDTO;
+import entities.CityInfo;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,10 +29,10 @@ class PersonFacadeTest {
         personFacade = PersonFacade.getPersonFacade(emf);
 
         EntityManager em = emf.createEntityManager();
-        Cityinfo c = new Cityinfo(2800L,"Lyngby");
+        CityInfo c = new CityInfo(2800L,"Lyngby");
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("Cityinfo.deleteAllRows").executeUpdate();
+            em.createNamedQuery("CityInfo.deleteAllRows").executeUpdate();
             em.persist(c);
             em.getTransaction().commit();
         } finally {
@@ -58,6 +58,12 @@ class PersonFacadeTest {
 
     @Test
     void deleteHobbyFromPerson() {
+    }
+
+    @Test
+    void addUser(){
+//        UserDTO user = new UserDTO("Malene", "Christensen", "malene@gmail.com","Højløkken", "46", 2800L,42752212L, "Home");
+//        assertEquals("Malene", personFacade.addUser(user).getFirstName());
     }
 
     @Test

@@ -1,7 +1,5 @@
 package dtos;
 
-import entities.Cityinfo;
-
 public class AddressDTO {
 
     private String street;

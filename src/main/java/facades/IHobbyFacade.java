@@ -2,7 +2,6 @@ package facades;
 
 import dtos.HobbyDTO;
 import dtos.PersonDTO;
-import entities.Hobby;
 
 import java.util.List;
 

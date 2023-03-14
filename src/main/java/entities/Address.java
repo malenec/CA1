@@ -1,59 +1,53 @@
 package entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.LinkedHashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "Address", indexes = {
-        @Index(name = "fk_Address_cityinfo_idx", columnList = "cityinfo_ZipCode")
-})
 public class Address {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Address_id", nullable = false)
+    @Column(name = "address_id", nullable = false)
     private Long address_id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "cityinfo_ZipCode", nullable = false)
-    private Cityinfo cityinfo;
-
-    @Column(name = "Street", nullable = false, length = 45)
+    @Size(max = 45)
+    @NotNull
+    @Column(name = "street", nullable = false, length = 45)
     private String street;
 
-    @Column(name = "AdditionalInfo", nullable = false, length = 45)
+    @Size(max = 45)
+    @NotNull
+    @Column(name = "additionalInfo", nullable = false, length = 45)
     private String additionalInfo;
 
-    @OneToMany(mappedBy = "address", orphanRemoval = true)
-    @JoinColumn(name = "Address_id")
-    private Set<Person> persons = new LinkedHashSet<>();
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "zipCode", nullable = false)
+    private CityInfo zipCode;
+
+    @OneToMany(mappedBy = "address", cascade = CascadeType.PERSIST)
+    private Set<Person> people = new LinkedHashSet<>();
 
     public Address() {
     }
 
-    public Address(String street, String additionalInfo, Cityinfo cityinfo) {
+
+
+    public Address(String street, String additionalInfo, CityInfo zipCode) {
         this.street = street;
         this.additionalInfo = additionalInfo;
-        this.cityinfo = cityinfo;
+        this.zipCode = zipCode;
     }
 
-
-    public Set<Person> getPersons() {
-        return persons;
+    public Long getAddress_id() {
+        return address_id;
     }
 
-    public void addPerson(Person person) {
-        this.persons.add(person);
-    }
-
-    public String getAdditionalInfo() {
-        return additionalInfo;
-    }
-
-    public void setAdditionalInfo(String additionalInfo) {
-        this.additionalInfo = additionalInfo;
+    public void setAddress_id(Long address_id) {
+        this.address_id = address_id;
     }
 
     public String getStreet() {
@@ -64,28 +58,29 @@ public class Address {
         this.street = street;
     }
 
-    public Cityinfo getCityinfo() {
-        return cityinfo;
+    public String getAdditionalInfo() {
+        return additionalInfo;
     }
 
-    public void setCityinfo(Cityinfo cityinfo) {
-        this.cityinfo = cityinfo;
+    public void setAdditionalInfo(String additionalInfo) {
+        this.additionalInfo = additionalInfo;
     }
 
-    public Long getAddress_id() {
-        return address_id;
+    public CityInfo getZipCode() {
+        return zipCode;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Address address = (Address) o;
-        return address_id != null && Objects.equals(address_id, address.address_id);
+    public void setZipCode(CityInfo zipCode) {
+        this.zipCode = zipCode;
     }
 
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
+    public Set<Person> getPeople() {
+        return people;
     }
+
+    public void addPerson(Person person) {
+
+        this.people.add(person);
+    }
+
 }

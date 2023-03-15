@@ -3,6 +3,7 @@ package dtos;
 import entities.Person;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -14,7 +15,8 @@ public class PersonDTO {
     private String lastName;
     private String email;
     private AddressDTO addressDTO;
-    private Set<PhoneDTO> phoneDTOSet;
+    private Set<PhoneDTO> phoneDTOSet = new LinkedHashSet<>();
+    private Set<HobbyDTO> hobbyDTOSet = new LinkedHashSet<>();
 
     public PersonDTO(Person person) {
         if(person.getId() != null)
@@ -24,6 +26,7 @@ public class PersonDTO {
         this.email = person.getEmail();
         this.addressDTO = new AddressDTO(person.getAddress().getStreet(), person.getAddress().getAdditionalInfo(), person.getAddress().getCityInfo().getZipCode());
         this.phoneDTOSet = person.getPhones().stream().map(phone -> new PhoneDTO(phone.getNumber(), phone.getDescription())).collect(Collectors.toSet());
+        this.hobbyDTOSet = person.getHobbies().stream().map(hobby -> new HobbyDTO(hobby.getName(), hobby.getWikiLink(), hobby.getCategory(), hobby.getType())).collect(Collectors.toSet());
     }
 
 
@@ -34,6 +37,7 @@ public class PersonDTO {
         this.addressDTO = addressDTO;
         this.phoneDTOSet = phoneDTOSet;
     }
+
 
     public static List<PersonDTO> getDtos(List<Person> persons) {
         List<PersonDTO> personDtos = new ArrayList();
@@ -90,15 +94,18 @@ public class PersonDTO {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return "PersonDTO{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", addressDTO=" + addressDTO +
-                ", phoneDTO=" + phoneDTOSet +
-                '}';
+
+    public Set<HobbyDTO> getHobbyDTOSet() {
+        return hobbyDTOSet;
     }
+
+    public void setHobbyDTOSet(Set<HobbyDTO> hobbyDTOSet) {
+        this.hobbyDTOSet = hobbyDTOSet;
+    }
+
+    public void addHobbyDTOToSet(HobbyDTO hobbyDTO) {
+        this.hobbyDTOSet.add(hobbyDTO);
+    }
+
+
 }

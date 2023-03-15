@@ -2,6 +2,7 @@
 package facades;
 
 import dtos.AddressDTO;
+import dtos.HobbyDTO;
 import dtos.PersonDTO;
 import dtos.PhoneDTO;
 import entities.CityInfo;
@@ -30,6 +31,7 @@ class PersonFacadeTest {
     private static PersonFacade personFacade;
 
     PersonDTO p1DTO, p2DTO;
+    HobbyDTO h1DTO, h2DTO;
 
     @BeforeAll
     static void setUpClass() {
@@ -68,6 +70,8 @@ class PersonFacadeTest {
         phones.add(phoneDTO_1);
         p1DTO = new PersonDTO("Musse", "Jensen", "test@gmail.com", addressDTO_1, phones);
         p1DTO = personFacade.addPerson(p1DTO);
+        h1DTO = new HobbyDTO("Strik", "https://www.test.dk", "nothing", "kedeligt");
+
 
 
 
@@ -87,6 +91,8 @@ class PersonFacadeTest {
 
     @Test
     void addHobbyToPerson() {
+
+
     }
 
     @Test

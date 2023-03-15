@@ -16,7 +16,7 @@ public interface IPersonFacade {
     public List<PersonDTO> getPersonsByZipCode(CityInfoDTO zipCode);
 
     //US6
-    public PersonDTO addHobbyToPerson(PersonDTO person, int hobbyId);
+    public PersonDTO addHobbyToPerson(Long hobbyId, Long personId);
 
     //US7
     public PersonDTO deleteHobbyFromPerson(PersonDTO person, int hobbyId);

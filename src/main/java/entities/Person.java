@@ -125,8 +125,30 @@ public class Person {
         return hobbies;
     }
 
-    public void setHobbies(Set<Hobby> hobbies) {
+    public void addHobbySet(Set<Hobby> hobbies) {
         this.hobbies = hobbies;
+        for (Hobby hobby : hobbies) {
+            hobby.addPersonToHobby(this);
+        }
     }
 
+    public void addHobbyToPerson(Hobby hobby) {
+        if (!hobbies.contains(hobby)) {
+            hobbies.add(hobby);
+            hobby.getPeople().add(this);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "Person{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", address=" + address +
+                ", phones=" + phones +
+                ", hobbies=" + hobbies +
+                '}';
+    }
 }

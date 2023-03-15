@@ -1,5 +1,6 @@
 package facades;
 
+import dtos.HobbyDTO;
 import dtos.PersonDTO;
 import dtos.CityInfoDTO;
 import entities.*;
@@ -52,8 +53,24 @@ public class PersonFacade implements IPersonFacade{
     }
 
     @Override
-    public PersonDTO addHobbyToPerson(PersonDTO person, int hobbyId) {
-        return null;
+    public PersonDTO addHobbyToPerson(Long hobbyId, Long personId) {
+        EntityManager em = getEntityManager();
+        Person p = em.find(Person.class, personId);
+        Hobby h = em.find(Hobby.class, hobbyId);
+
+
+
+        try {
+            em.getTransaction().begin();
+            p.addHobbyToPerson(h);
+            em.getTransaction().commit();
+        }
+        finally {
+            em.close();
+        }
+
+        return new PersonDTO(p);
+
     }
 
     @Override
@@ -106,6 +123,11 @@ public class PersonFacade implements IPersonFacade{
         Set<Phone> phones = new LinkedHashSet<>();
         personDTO.getPhoneDTOSet().forEach(phoneDTO -> phones.add(new Phone(phoneDTO.getNumber(), phoneDTO.getDescription())));
         person.addPhoneSet(phones);
+
+
+        Set<Hobby> hobbies = new LinkedHashSet<>();
+        personDTO.getHobbyDTOSet().forEach(hobbyDTO -> hobbies.add(new Hobby(hobbyDTO.getHobbyName(), hobbyDTO.getWikiLink(), hobbyDTO.getCategory(), hobbyDTO.getType())));
+        person.addHobbySet(hobbies);
 
         try {
             em.getTransaction().begin();

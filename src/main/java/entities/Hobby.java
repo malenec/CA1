@@ -39,6 +39,16 @@ public class Hobby {
             inverseJoinColumns = @JoinColumn(name = "person_id"))
     private Set<Person> people = new LinkedHashSet<>();
 
+    public Hobby() {
+    }
+
+    public Hobby(String name, String wikiLink, String category, String type) {
+        this.name = name;
+        this.wikiLink = wikiLink;
+        this.category = category;
+        this.type = type;
+    }
+
     public Long getId() {
         return id;
     }
@@ -83,8 +93,23 @@ public class Hobby {
         return people;
     }
 
+    public void addPersonToHobby(Person person) {
+        this.people.add(person);
+    }
+
     public void setPeople(Set<Person> people) {
         this.people = people;
     }
 
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "Hobby{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", wikiLink='" + wikiLink + '\'' +
+                ", category='" + category + '\'' +
+                ", type='" + type + '\'' +
+                ", people=" + people +
+                '}';
+    }
 }

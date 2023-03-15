@@ -41,6 +41,6 @@ public class Populator {
     public static void main(String[] args) {
         /*populate();*/
         PersonFacade pf = PersonFacade.getPersonFacade(EMF_Creator.createEntityManagerFactory());
-        pf.addHobbyToPerson(412L,2L);
+        pf.addHobbyToPerson(412L,3L);
     }
 }

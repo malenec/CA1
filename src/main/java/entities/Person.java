@@ -136,7 +136,7 @@ public class Person {
     //israas
     public void addHobbyToPerson(Hobby hobby) {
         hobbies.add(hobby);
-        hobby.addPersonToHobby(this);
+//        hobby.addPersonToHobby(this);
 
     }
 

@@ -132,12 +132,22 @@ public class Person {
         }
     }
 
+
+    //israas
     public void addHobbyToPerson(Hobby hobby) {
+        hobbies.add(hobby);
+        hobby.addPersonToHobby(this);
+
+    }
+
+    public void addHobbyToPerson2(Hobby hobby) {
         if (!hobbies.contains(hobby)) {
             hobbies.add(hobby);
             hobby.getPeople().add(this);
         }
     }
+
+
 
     @Override
     public String toString() {

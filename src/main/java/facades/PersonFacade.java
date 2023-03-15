@@ -57,12 +57,11 @@ public class PersonFacade implements IPersonFacade{
         EntityManager em = getEntityManager();
         Person p = em.find(Person.class, personId);
         Hobby h = em.find(Hobby.class, hobbyId);
-
-
+        p.addHobbyToPerson(h);
 
         try {
             em.getTransaction().begin();
-            p.addHobbyToPerson(h);
+            em.merge(p);
             em.getTransaction().commit();
         }
         finally {

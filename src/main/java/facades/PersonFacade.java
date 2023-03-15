@@ -59,7 +59,7 @@ public class PersonFacade implements IPersonFacade{
         return null;
     }
 
-    @Override
+    /*@Override
     public PersonDTO addPerson(PersonDTO person) {
 
         EntityManager em = getEntityManager();
@@ -82,9 +82,9 @@ public class PersonFacade implements IPersonFacade{
         }
 
         return new PersonDTO(p);
-    }
+    }*/
 
-    @Override
+    /*@Override
     public PersonDTO updatePerson(PersonDTO personDTO) {
         EntityManager em = emf.createEntityManager();
         Person person = em.find(Person.class, personDTO.getId());
@@ -110,20 +110,20 @@ public class PersonFacade implements IPersonFacade{
             em.close();
         }
         return new PersonDTO(person);
-    }
+    }*/
 
     @Override
     public PersonDTO deletePerson(Long id) {
         return null;
     }
 
-    @Override
-    public List<PersonDTO> getAllPersons() {
-        EntityManager em = emf.createEntityManager();
-        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p", Person.class);
-        List<Person> persons = query.getResultList();
-        return PersonDTO.getDtos(persons);
-    }
+//    @Override
+//    public List<PersonDTO> getAllPersons() {
+//        EntityManager em = emf.createEntityManager();
+//        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p", Person.class);
+//        List<Person> persons = query.getResultList();
+//        return PersonDTO.getDtos(persons);
+  //  }
 
 
 

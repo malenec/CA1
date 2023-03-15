@@ -4,6 +4,8 @@ import entities.Person;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class PersonDTO {
 
@@ -12,7 +14,8 @@ public class PersonDTO {
     private String lastName;
     private String email;
     private AddressDTO addressDTO;
-    private PhoneDTO phoneDTO;
+    //private PhoneDTO phoneDTO;
+    private Set<PhoneDTO> phoneDTOSet;
 
     public PersonDTO(Person person) {
         if(person.getId() != null)
@@ -21,7 +24,8 @@ public class PersonDTO {
         this.lastName = person.getLastName();
         this.email = person.getEmail();
         this.addressDTO = new AddressDTO(person.getAddress().getStreet(), person.getAddress().getAdditionalInfo(), person.getAddress().getCityInfo().getZipCode());
-        this.phoneDTO = new PhoneDTO(person.getPhone().getNumber(), person.getPhone().getDescription());
+        //this.phoneDTO = new PhoneDTO(person.getPhone().getNumber(), person.getPhone().getDescription());
+        this.phoneDTOSet = person.getPhones().stream().map(phone -> new PhoneDTO(phone.getNumber(), phone.getDescription())).collect(Collectors.toSet());
     }
 
 
@@ -30,7 +34,7 @@ public class PersonDTO {
         this.lastName = lastName;
         this.email = email;
         this.addressDTO = addressDTO;
-        this.phoneDTO = phoneDTO;
+        //this.phoneDTO = phoneDTO;
     }
 
     public static List<PersonDTO> getDtos(List<Person> persons) {
@@ -72,13 +76,13 @@ public class PersonDTO {
         this.addressDTO = addressDTO;
     }
 
-    public PhoneDTO getPhoneDTO() {
+    /*public PhoneDTO getPhoneDTO() {
         return phoneDTO;
     }
 
     public void setPhoneDTO(PhoneDTO phoneDTO) {
         this.phoneDTO = phoneDTO;
-    }
+    }*/
 
     public Long getId() {
         return id;
@@ -96,7 +100,7 @@ public class PersonDTO {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", addressDTO=" + addressDTO +
-                ", phoneDTO=" + phoneDTO +
+                ", phoneDTO=" + phoneDTOSet +
                 '}';
     }
 }

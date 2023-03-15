@@ -21,7 +21,7 @@ public class Populator {
         EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
         PersonFacade pf = PersonFacade.getPersonFacade(emf);
 
-        AddressDTO addressDTO_1 = new AddressDTO("Lyngbyvej", "46", 2800L);
+        /*AddressDTO addressDTO_1 = new AddressDTO("Lyngbyvej", "46", 2800L);
         PhoneDTO phoneDTO_1 = new PhoneDTO(42752212L, "Home");
         PersonDTO personDTO_1 = new PersonDTO("Malene", "Christensen", "malene@gmail.com", addressDTO_1, phoneDTO_1);
         pf.addPerson(personDTO_1);
@@ -34,7 +34,7 @@ public class Populator {
         AddressDTO addressDTO_3 = new AddressDTO("Valbygade", "19 1.tv", 2500L);
         PhoneDTO phoneDTO_3 = new PhoneDTO(12345678L, "Mobile");
         PersonDTO personDTO_3 = new PersonDTO("Henriette", "Jensen", "henje@gmail.com", addressDTO_3, phoneDTO_3);
-        pf.addPerson(personDTO_3);
+        pf.addPerson(personDTO_3);*/
 
     }
     
@@ -42,6 +42,6 @@ public class Populator {
         /*populate();*/
         PersonFacade pf = PersonFacade.getPersonFacade(EMF_Creator.createEntityManagerFactory());
 
-        System.out.println(pf.getPersonById(5L));
+        System.out.println(pf.getPersonById(7L));
     }
 }

@@ -24,6 +24,7 @@ public class PersonDTO {
         this.phoneDTO = new PhoneDTO(person.getPhone().getNumber(), person.getPhone().getDescription());
     }
 
+
     public PersonDTO(String firstName, String lastName, String email, AddressDTO addressDTO, PhoneDTO phoneDTO) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -85,5 +86,17 @@ public class PersonDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "PersonDTO{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", addressDTO=" + addressDTO +
+                ", phoneDTO=" + phoneDTO +
+                '}';
     }
 }

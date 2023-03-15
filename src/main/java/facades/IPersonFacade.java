@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IPersonFacade {
 
-    public PersonDTO getPersonById(int id);
+    public PersonDTO getPersonById(Long id);
 
     //US1
     public PersonDTO getPersonByPhoneNumber(String number);

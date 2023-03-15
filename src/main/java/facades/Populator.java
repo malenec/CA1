@@ -39,6 +39,9 @@ public class Populator {
     }
     
     public static void main(String[] args) {
-        populate();
+        /*populate();*/
+        PersonFacade pf = PersonFacade.getPersonFacade(EMF_Creator.createEntityManagerFactory());
+
+        System.out.println(pf.getPersonById(5L));
     }
 }

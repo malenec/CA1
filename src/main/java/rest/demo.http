@@ -47,20 +47,25 @@ Content-Type: application/json
     }
   ]
 }
+###
 
-
-
-
-
+// getAllHobbies
+GET http://localhost:8080/CA1/api/hobby
 
 
 ####
-#POST http://localhost:8080/devops_starter_war_exploded/api/xxx
-#Content-Type: application/json
-##User-Agent: Mozilla/5.0 (platform; rv:geckoversion) Gecko/geckotrail Firefox/firefoxversion
-#
-#{
-#  "str1": "First Property",
-#  "str2": "Second Property"
-#}
-#
+
+PUT http://localhost:8080/CA1/api/person/hobby/2
+Content-Type: application/json
+#User-Agent: Mozilla/5.0 (platform; rv:geckoversion) Gecko/geckotrail Firefox/firefoxversion
+
+{
+  "hobbyId": 450,
+  "hobbyName": "Trainspotting (hobby)",
+  "wikiLink": "https://en.wikipedia.org/wiki/Trainspotting_(hobby)",
+  "category": "Observation",
+  "type": "UdendÃ¸rs",
+  "personIds": []
+}
+
+###

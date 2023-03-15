@@ -1,8 +1,11 @@
 package dtos;
 
 import entities.Hobby;
+import entities.Person;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 public class HobbyDTO {
@@ -28,6 +31,12 @@ public class HobbyDTO {
         this.wikiLink = wikiLink;
         this.category = category;
         this.type = type;
+    }
+
+    public static List<HobbyDTO> getDtos(List<Hobby> hobbies) {
+        List<HobbyDTO> hobbyDTOS = new ArrayList();
+        hobbies.forEach(hobby->hobbyDTOS.add(new HobbyDTO(hobby)));
+        return hobbyDTOS;
     }
 
     public Long getHobbyId() {

@@ -5,10 +5,7 @@
  */
 package facades;
 
-import dtos.AddressDTO;
-import dtos.PersonDTO;
-import dtos.PhoneDTO;
-import dtos.RenameMeDTO;
+import dtos.*;
 import entities.Address;
 import entities.Person;
 import entities.Phone;
@@ -20,6 +17,7 @@ public class Populator {
     public static void populate(){
         EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
         PersonFacade pf = PersonFacade.getPersonFacade(emf);
+        HobbyFacade hf = HobbyFacade.getHobbyFacade(emf);
 
         /*AddressDTO addressDTO_1 = new AddressDTO("Lyngbyvej", "46", 2800L);
         PhoneDTO phoneDTO_1 = new PhoneDTO(42752212L, "Home");
@@ -42,5 +40,10 @@ public class Populator {
         /*populate();*/
         PersonFacade pf = PersonFacade.getPersonFacade(EMF_Creator.createEntityManagerFactory());
         pf.addHobbyToPerson(412L,3L);
+        HobbyFacade hf = HobbyFacade.getHobbyFacade(EMF_Creator.createEntityManagerFactory());
+        System.out.println(hf.getHobbyById(412L).getHobbyName());
+
+        HobbyDTO hDTO = new HobbyDTO(412L);
+
     }
 }

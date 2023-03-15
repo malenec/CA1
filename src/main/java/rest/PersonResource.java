@@ -2,9 +2,11 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dtos.HobbyDTO;
 import dtos.PersonDTO;
 import dtos.RenameMeDTO;
 import facades.FacadeExample;
+import facades.HobbyFacade;
 import facades.PersonFacade;
 import utils.EMF_Creator;
 
@@ -17,7 +19,6 @@ import javax.ws.rs.core.Response;
 public class PersonResource {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
-
     private static final PersonFacade FACADE = PersonFacade.getPersonFacade(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
@@ -51,6 +52,18 @@ public class PersonResource {
         PersonDTO personDTO = GSON.fromJson(input, PersonDTO.class);
         personDTO.setId(id);
         personDTO = FACADE.updatePerson(personDTO);
+        return Response.ok().entity(personDTO).build();
+    }
+
+    @PUT
+    @Path("/hobby/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    public Response addHobbyToPerson(@PathParam("id") Long id, String input) {
+        HobbyDTO hobbyDTO = GSON.fromJson(input, HobbyDTO.class);
+
+        PersonDTO personDTO = FACADE.addHobbyToPerson(hobbyDTO.getHobbyId(), id);
+
         return Response.ok().entity(personDTO).build();
     }
 

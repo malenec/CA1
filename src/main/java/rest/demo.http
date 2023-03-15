@@ -2,6 +2,9 @@
 GET http://localhost:8080/CA1/api/person
 
 ###
+GET http://localhost:8080/CA1/api/person/1
+
+###
 POST http://localhost:8080/CA1/api/person
 Content-Type: application/json
 #User-Agent: Mozilla/5.0 (platform; rv:geckoversion) Gecko/geckotrail Firefox/firefoxversion
@@ -15,10 +18,34 @@ Content-Type: application/json
       "additionalInfo": "46 2.tv2hej",
       "zipCode": 2800
     },
-    "phoneDTO": {
-      "number": 55555555,
-      "description": "Work2"
+    "phoneDTOSet": [
+     {
+      "number": 11223366,
+      "description": "Mobile"
+     }
+  ]
+}
+
+###
+PUT http://localhost:8080/CA1/api/person/1
+Content-Type: application/json
+#User-Agent: Mozilla/5.0 (platform; rv:geckoversion) Gecko/geckotrail Firefox/firefoxversion
+
+{
+  "firstName": "Israa2",
+  "lastName": "Christensen2",
+  "email": "malene2@gmail.com",
+  "addressDTO": {
+    "street": "Lyngbyvej2",
+    "additionalInfo": "46 2.tv2hej",
+    "zipCode": 2800
+  },
+  "phoneDTOSet": [
+    {
+      "number": 42752212,
+      "description": "Mobile"
     }
+  ]
 }
 
 

@@ -27,12 +27,30 @@ public class PersonResource {
         return Response.ok().entity(GSON.toJson(FACADE.getAllPersons())).build();
     }
 
+    @GET
+    @Path("{id}")
+    public Response getPerson(@PathParam("id") Long id) {
+        PersonDTO personDTO = FACADE.getPersonById(id);
+        return Response.ok().entity(GSON.toJson(personDTO)).build();
+    }
+
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
     public Response postPerson(String input) {
         PersonDTO personDTO = GSON.fromJson(input, PersonDTO.class);
         FACADE.addPerson(personDTO);
+        return Response.ok().entity(personDTO).build();
+    }
+
+    @PUT
+    @Path("{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    public Response putPerson(@PathParam("id") Long id, String input) {
+        PersonDTO personDTO = GSON.fromJson(input, PersonDTO.class);
+        personDTO.setId(id);
+        personDTO = FACADE.updatePerson(personDTO);
         return Response.ok().entity(personDTO).build();
     }
 

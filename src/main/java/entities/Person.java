@@ -113,10 +113,13 @@ public class Person {
     }
 
 
-    public void addPhone(Phone phone) {
-        this.phones.add(phone);
-
+    public void addPhoneSet(Set<Phone> phones) {
+        this.phones = phones;
+        for (Phone phone : phones) {
+            phone.addPersonToPhone(this);
+        }
     }
+
 
     public Set<Hobby> getHobbies() {
         return hobbies;

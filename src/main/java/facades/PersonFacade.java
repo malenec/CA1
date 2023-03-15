@@ -7,7 +7,9 @@ import entities.*;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 public class PersonFacade implements IPersonFacade{
 
@@ -59,19 +61,21 @@ public class PersonFacade implements IPersonFacade{
         return null;
     }
 
-    /*@Override
-    public PersonDTO addPerson(PersonDTO person) {
+    @Override
+    public PersonDTO addPerson(PersonDTO personDTO) {
 
         EntityManager em = getEntityManager();
 
-        CityInfo c = em.find(CityInfo.class, person.getAddressDTO().getZipCode());
-        Address a = new Address(person.getAddressDTO().getStreet(), person.getAddressDTO().getAdditionalInfo(), c);
-        Person p = new Person(person.getFirstName(), person.getLastName(), person.getEmail());
-        Phone ph = new Phone(person.getPhoneDTO().getNumber(), person.getPhoneDTO().getDescription());
+        CityInfo c = em.find(CityInfo.class, personDTO.getAddressDTO().getZipCode());
+        Address a = new Address(personDTO.getAddressDTO().getStreet(), personDTO.getAddressDTO().getAdditionalInfo(), c);
+        Person p = new Person(personDTO.getFirstName(), personDTO.getLastName(), personDTO.getEmail());
+        Set<Phone> phones = new LinkedHashSet<>();
+        personDTO.getPhoneDTOSet().forEach(phoneDTO -> phones.add(new Phone(phoneDTO.getNumber(), phoneDTO.getDescription())));
         p.addAddress(a);
-        ph.addPerson(p);
+        p.addPhoneSet(phones);
 
-        try {
+
+            try {
             em.getTransaction().begin();
             em.persist(a);
             em.persist(p);
@@ -82,9 +86,9 @@ public class PersonFacade implements IPersonFacade{
         }
 
         return new PersonDTO(p);
-    }*/
+    }
 
-    /*@Override
+    @Override
     public PersonDTO updatePerson(PersonDTO personDTO) {
         EntityManager em = emf.createEntityManager();
         Person person = em.find(Person.class, personDTO.getId());
@@ -99,31 +103,32 @@ public class PersonFacade implements IPersonFacade{
         Address a = new Address(personDTO.getAddressDTO().getStreet(), personDTO.getAddressDTO().getAdditionalInfo(), c);
         person.addAddress(a);
 
-        Phone ph = new Phone(personDTO.getPhoneDTO().getNumber(), personDTO.getPhoneDTO().getDescription());
-        ph.addPerson(person);
+        Set<Phone> phones = new LinkedHashSet<>();
+        personDTO.getPhoneDTOSet().forEach(phoneDTO -> phones.add(new Phone(phoneDTO.getNumber(), phoneDTO.getDescription())));
+        person.addPhoneSet(phones);
 
         try {
             em.getTransaction().begin();
-            em.persist(person);
+            em.merge(person);
             em.getTransaction().commit();
         } finally {
             em.close();
         }
         return new PersonDTO(person);
-    }*/
+    }
 
     @Override
     public PersonDTO deletePerson(Long id) {
         return null;
     }
 
-//    @Override
-//    public List<PersonDTO> getAllPersons() {
-//        EntityManager em = emf.createEntityManager();
-//        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p", Person.class);
-//        List<Person> persons = query.getResultList();
-//        return PersonDTO.getDtos(persons);
-  //  }
+    @Override
+    public List<PersonDTO> getAllPersons() {
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p", Person.class);
+        List<Person> persons = query.getResultList();
+        return PersonDTO.getDtos(persons);
+    }
 
 
 

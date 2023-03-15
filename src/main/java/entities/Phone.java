@@ -51,9 +51,8 @@ public class Phone {
         return person;
     }
 
-    public void addPerson(Person person) {
+    public void addPersonToPhone(Person person) {
         this.person = person;
-        person.addPhone(this);
     }
 
 

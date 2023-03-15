@@ -22,15 +22,15 @@ public interface IPersonFacade {
     public PersonDTO deleteHobbyFromPerson(PersonDTO person, int hobbyId);
 
     //US8
-//    public PersonDTO addPerson(PersonDTO person);
+    public PersonDTO addPerson(PersonDTO person);
 
     //US9
-   // public PersonDTO updatePerson(PersonDTO person);
+    public PersonDTO updatePerson(PersonDTO person);
 
     //US10
     public PersonDTO deletePerson(Long id);
 
-//    public List<PersonDTO> getAllPersons();
+    public List<PersonDTO> getAllPersons();
 
 
 

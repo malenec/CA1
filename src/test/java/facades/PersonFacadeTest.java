@@ -1,4 +1,4 @@
-/*
+
 package facades;
 
 import dtos.AddressDTO;
@@ -15,6 +15,10 @@ import utils.EMF_Creator;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.TreeSet;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -59,9 +63,11 @@ class PersonFacadeTest {
 
 
         AddressDTO addressDTO_1 = new AddressDTO("Parkvej", "61", 4140L);
+        Set<PhoneDTO> phones = new LinkedHashSet<>();
         PhoneDTO phoneDTO_1 = new PhoneDTO(41421359L, "Home");
-        p1DTO = new PersonDTO("Musse", "Jensen", "test@gmail.com", addressDTO_1, phoneDTO_1);
-        personFacade.addPerson(p1DTO);
+        phones.add(phoneDTO_1);
+        p1DTO = new PersonDTO("Musse", "Jensen", "test@gmail.com", addressDTO_1, phones);
+        p1DTO = personFacade.addPerson(p1DTO);
 
 
 
@@ -89,7 +95,8 @@ class PersonFacadeTest {
 
     @Test
     void getPersonById() {
-        assertEquals(1, personFacade.getPersonById(p1DTO.getId()).getId());
+        System.out.println("Person id: " + p1DTO.getId());
+        assertEquals(6, personFacade.getPersonById(p1DTO.getId()).getId());
 
     }
 
@@ -98,8 +105,11 @@ class PersonFacadeTest {
     void addPerson() {
 
         AddressDTO addressDTO_1 = new AddressDTO("Højløkken", "46", 2800L);
+
+        Set<PhoneDTO> phones = new LinkedHashSet<>();
         PhoneDTO phoneDTO_1 = new PhoneDTO(42752212L, "Home");
-        PersonDTO personDTO_1 = new PersonDTO("Malene", "Christensen", "malene@gmail.com", addressDTO_1, phoneDTO_1);
+        phones.add(phoneDTO_1);
+        PersonDTO personDTO_1 = new PersonDTO("Malene", "Christensen", "malene@gmail.com", addressDTO_1, phones);
 
         assertEquals("Malene", personFacade.addPerson(personDTO_1).getFirstName());
 
@@ -110,11 +120,12 @@ class PersonFacadeTest {
 
 
 
-//        personFacade.getPersonById(p1DTO.getId()).setFirstName("Jens");
-//
-//        personFacade.updatePerson(p1DTO);
-//
-//        assertEquals("Jens", personFacade.getPersonById(p1DTO.getId()).getFirstName());
+        p1DTO = personFacade.getPersonById(p1DTO.getId());
+        p1DTO.setFirstName("Jens");
+
+        personFacade.updatePerson(p1DTO);
+
+        assertEquals("Jens", personFacade.getPersonById(p1DTO.getId()).getFirstName());
 
 
 
@@ -123,4 +134,4 @@ class PersonFacadeTest {
     @Test
     void deletePerson() {
     }
-}*/
+}

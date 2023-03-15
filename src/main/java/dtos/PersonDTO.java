@@ -14,7 +14,6 @@ public class PersonDTO {
     private String lastName;
     private String email;
     private AddressDTO addressDTO;
-    //private PhoneDTO phoneDTO;
     private Set<PhoneDTO> phoneDTOSet;
 
     public PersonDTO(Person person) {
@@ -24,17 +23,16 @@ public class PersonDTO {
         this.lastName = person.getLastName();
         this.email = person.getEmail();
         this.addressDTO = new AddressDTO(person.getAddress().getStreet(), person.getAddress().getAdditionalInfo(), person.getAddress().getCityInfo().getZipCode());
-        //this.phoneDTO = new PhoneDTO(person.getPhone().getNumber(), person.getPhone().getDescription());
         this.phoneDTOSet = person.getPhones().stream().map(phone -> new PhoneDTO(phone.getNumber(), phone.getDescription())).collect(Collectors.toSet());
     }
 
 
-    public PersonDTO(String firstName, String lastName, String email, AddressDTO addressDTO, PhoneDTO phoneDTO) {
+    public PersonDTO(String firstName, String lastName, String email, AddressDTO addressDTO, Set<PhoneDTO> phoneDTOSet) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.addressDTO = addressDTO;
-        //this.phoneDTO = phoneDTO;
+        this.phoneDTOSet = phoneDTOSet;
     }
 
     public static List<PersonDTO> getDtos(List<Person> persons) {
@@ -76,13 +74,13 @@ public class PersonDTO {
         this.addressDTO = addressDTO;
     }
 
-    /*public PhoneDTO getPhoneDTO() {
-        return phoneDTO;
+    public Set<PhoneDTO> getPhoneDTOSet() {
+        return phoneDTOSet;
     }
 
-    public void setPhoneDTO(PhoneDTO phoneDTO) {
-        this.phoneDTO = phoneDTO;
-    }*/
+    public void addPhoneDTOToSet(PhoneDTO phoneDTO) {
+        this.phoneDTOSet.add(phoneDTO);
+    }
 
     public Long getId() {
         return id;

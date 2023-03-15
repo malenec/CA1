@@ -24,8 +24,7 @@ public class PersonResource {
 
     @GET
     public Response getAll() {
-//        return Response.ok().entity(GSON.toJson(FACADE.getAllPersons())).build();
-        return null;
+        return Response.ok().entity(GSON.toJson(FACADE.getAllPersons())).build();
     }
 
     @POST
@@ -33,7 +32,7 @@ public class PersonResource {
     @Consumes({MediaType.APPLICATION_JSON})
     public Response postPerson(String input) {
         PersonDTO personDTO = GSON.fromJson(input, PersonDTO.class);
-//        FACADE.addPerson(personDTO);
+        FACADE.addPerson(personDTO);
         return Response.ok().entity(personDTO).build();
     }
 

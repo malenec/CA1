@@ -42,8 +42,5 @@ public class Populator {
         pf.addHobbyToPerson(412L,3L);
         HobbyFacade hf = HobbyFacade.getHobbyFacade(EMF_Creator.createEntityManagerFactory());
         System.out.println(hf.getHobbyById(412L).getHobbyName());
-
-        HobbyDTO hDTO = new HobbyDTO(412L);
-
     }
 }

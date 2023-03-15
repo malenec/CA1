@@ -43,43 +43,50 @@
             </tr>
             <tr>
                 <td>GET</td>
-                <td>/api/person</td>
+                <td>/api/person <br> <code>(getAllPersons)</code></td>
                 <td></td>
                 <td>[person, person, ...] (1b)</td>
                 <td>(e1) <br> (e3)</td>
             </tr>
             <tr>
                 <td>GET</td>
-                <td>/api/person/{id} <br> <code>id: A person ID</code></td>
+                <td>/api/person/{id} <br> <code>id: A person ID</code> <br> <code>(getPersonById)</code></td>
                 <td></td>
                 <td>user (1)</td>
                 <td>(e1) <br> (e3)</td>
             </tr>
             <tr>
-                <td>PUT</td>
-                <td>/api/person</td>
+                <td>POST</td>
+                <td>/api/person <br> <code>(addPerson) </code></td>
                 <td>person(1a) without id</td>
                 <td></td>
                 <td>(e2) <br> (e3)</td>
             </tr>
             <tr>
-                <td>POST</td>
-                <td>/api/person/addHobby/{person_id, hobby_id} <br> <code>Id: A person ID and hobby ID</code></td>
+                <td>PUT</td>
+                <td>/api/person/hobby/{id} <br> <code><b>Id: A person ID</b></code> <br> <code>(addHobbyToPerson)</code></td>
                 <td></td>
                 <td></td>
                 <td>(e2) <br> (e3)</td>
             </tr>
             <tr>
-                <td>Delete</td>
-                <td>/api/person/delete/{id} <br> <code>id: A person ID</code></td>
-                <td></td>
+                <td>PUT</td>
+                <td>/api/person/{id} <br> <code>Id: A person ID</code> <br> <code>(updatePerson)</code></td>
+                <td>person(1a) without id</td>
                 <td></td>
                 <td>(e2) <br> (e3)</td>
             </tr>
             <tr>
                 <td>Delete</td>
-                <td>/api/person/deleteHobby/{person_id, hobby_id} <br> <code>Id: A person ID and hobby ID</code></td>
+                <td>/api/person/delete/{id} <br> <code>id: A person ID</code> <br> <code>(deletePerson)</code></td>
+                <td>Id: A person ID</td>
                 <td></td>
+                <td>(e2) <br> (e3)</td>
+            </tr>
+            <tr>
+                <td>Delete</td>
+                <td>/api/person/deleteHobby/{person_id, hobby_id} <br> <code>Id: A person ID and hobby ID</code><br> <code>(deleteHobbyFromPerson)</code></td>
+                <td>Id: A person ID and hobby ID</td>
                 <td></td>
                 <td>(e2) <br> (e3)</td>
             </tr>
@@ -92,7 +99,7 @@
             </tr>
             <tr>
                 <td>GET</td>
-                <td>/api/hobby/</td>
+                <td>/api/hobby/ <br> <code>(getAllHobbies)</code></td>
                 <td></td>
                 <td>[hobby, hobby, …] (4b)</td>
                 <td>(e1) <br> (e3)</td>
@@ -101,7 +108,7 @@
                 <td>GET</td>
                 <td>/api/hobby/all/{id} <br> <code>Id: A hobby ID</code></td>
                 <td></td>
-                <td>[person, person, ...](1b)</td>
+                <td>[hobby, hobby, ...](4b)</td>
                 <td>(e1) <br> (e3)</td>
             </tr>
             <tr>

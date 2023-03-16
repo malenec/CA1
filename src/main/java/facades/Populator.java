@@ -42,25 +42,27 @@ public class Populator {
     }
 
     public static void main(String[] args) {
+
         /*populate();*/
+
         PersonFacade pf = PersonFacade.getPersonFacade(EMF_Creator.createEntityManagerFactory());
-//        pf.addHobbyToPerson(412L,3L);
-//        HobbyFacade hf = HobbyFacade.getHobbyFacade(EMF_Creator.createEntityManagerFactory());
-//        System.out.println(hf.getHobbyById(412L).getHobbyName());
 
-//        pf.deletePerson(4L);
-//        Set<PhoneDTO> phones = new LinkedHashSet<>();
-//        phones.add(new PhoneDTO(93929190L, "Mobile"));
-//        pf.addPerson(new PersonDTO("Jens", "Jensen", "jens@email.dk", new AddressDTO("Lyngbyvej2", "46 2.tv2hej", 2800L), phones));
-//        pf.deletePerson(3L);
+        Set<PhoneDTO> phonesJens = new LinkedHashSet<>();
+        phonesJens.add(new PhoneDTO(93929190L, "Mobile"));
+        pf.addPerson(new PersonDTO("Jens", "Jensen", "jens@email.dk", new AddressDTO("Lyngbyvej2", "46 2.tv2hej", 2800L), phonesJens));
 
-//        pf.addHobbyToPerson(420L,7L);
-//        pf.addHobbyToPerson(416L,6L);
-//        pf.addHobbyToPerson(420L,6L);
-//        pf.deleteHobbyFromPerson(416L,1L);
-//        pf.addHobbyToPerson(412L,1L);
-//        pf.addHobbyToPerson(413L,1L);
-        pf.deleteHobbyFromPerson(416L,7L);
-//        pf.deletePerson(6L);
+        pf.addHobbyToPerson(412L,11L);
+        pf.addHobbyToPerson(413L,11L);
+//        pf.deleteHobbyFromPerson(413L,11L);
+//        pf.deletePerson(11L);
+
+        Set<PhoneDTO> phonesSigurd = new LinkedHashSet<>();
+        phonesSigurd.add(new PhoneDTO(83828180L, "Work"));
+        pf.addPerson(new PersonDTO("Sigurd", "Sigurdsen", "sigurd@email.dk", new AddressDTO("Sigurdvej", "40", 2200L), phonesSigurd));
+        pf.addHobbyToPerson(16L, 12L);
+        pf.addHobbyToPerson(8L, 12L);
+//        pf.deletePerson(12L);
+
+
     }
 }

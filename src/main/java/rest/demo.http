@@ -2,7 +2,7 @@
 GET http://localhost:8080/CA1/api/person
 
 ###
-GET http://localhost:8080/CA1/api/person/1
+GET http://localhost:8080/CA1/api/person/9
 
 ###
 POST http://localhost:8080/CA1/api/person
@@ -69,3 +69,20 @@ Content-Type: application/json
 }
 
 ###
+
+DELETE http://localhost:8080/CA1/api/person/10
+
+###
+
+DELETE http://localhost:8080/CA1/api/person/hobby/9
+Content-Type: application/json
+#User-Agent: Mozilla/5.0 (platform; rv:geckoversion) Gecko/geckotrail Firefox/firefoxversion
+
+{
+  "hobbyId": 413,
+  "hobbyName": "Jukskei",
+  "wikiLink": "https://en.wikipedia.org/wiki/Jukskei",
+  "category": "Konkurrence",
+  "type": "UdendÃ¸rs",
+  "personIds": []
+}

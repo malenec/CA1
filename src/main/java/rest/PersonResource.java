@@ -61,9 +61,25 @@ public class PersonResource {
     @Consumes({MediaType.APPLICATION_JSON})
     public Response addHobbyToPerson(@PathParam("id") Long id, String input) {
         HobbyDTO hobbyDTO = GSON.fromJson(input, HobbyDTO.class);
-
         PersonDTO personDTO = FACADE.addHobbyToPerson(hobbyDTO.getHobbyId(), id);
+        return Response.ok().entity(personDTO).build();
+    }
 
+    @DELETE     //deletes the WHOLE person
+    @Path("{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response deletePerson(@PathParam("id") Long id) {
+        PersonDTO personDTO = FACADE.deletePerson(id);
+        return Response.ok().entity(personDTO).build();
+    }
+
+    @DELETE     //deletes ONLY ONE hobby from the person
+    @Path("/hobby/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    public Response deleteHobbyFromPerson(@PathParam("id") Long id, String input) {
+        HobbyDTO hobbyDTO = GSON.fromJson(input, HobbyDTO.class);
+        PersonDTO personDTO = FACADE.deleteHobbyFromPerson(hobbyDTO.getHobbyId(), id);
         return Response.ok().entity(personDTO).build();
     }
 

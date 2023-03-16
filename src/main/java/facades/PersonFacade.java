@@ -83,6 +83,8 @@ public class PersonFacade implements IPersonFacade{
             throw new IllegalArgumentException("No person with that id: " + personId + " exists");
         }
 
+        p.getHobbies().forEach((hobby)-> System.out.println("Dette er sigurds hobby" + hobby.getName()));
+
         p.getHobbies().forEach((hobby)->
         {
             if(hobby.getId() == h.getId()){

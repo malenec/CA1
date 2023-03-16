@@ -86,3 +86,9 @@ Content-Type: application/json
   "type": "UdendÃ¸rs",
   "personIds": []
 }
+
+
+###
+
+// getAllZipCodes
+GET http://localhost:8080/CA1/api/zipcode

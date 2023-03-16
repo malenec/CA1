@@ -73,8 +73,31 @@ public class PersonFacade implements IPersonFacade{
     }
 
     @Override
-    public PersonDTO deleteHobbyFromPerson(PersonDTO person, int hobbyId) {
-        return null;
+    public PersonDTO deleteHobbyFromPerson(Long hobbyId, Long personId) {
+
+        EntityManager em = emf.createEntityManager();
+        Person p = em.find(Person.class, personId);
+        Hobby h = em.find(Hobby.class, hobbyId);
+
+        if(p == null){
+            throw new IllegalArgumentException("No person with that id: " + personId + " exists");
+        }
+
+        p.getHobbies().forEach((hobby)->
+        {
+            if(hobby.getId() == h.getId()){
+                p.removeHobbyFromPerson(hobby);
+            }
+        });
+
+        try{
+            em.getTransaction().begin();
+            em.merge(p);
+            em.getTransaction().commit();
+        }finally {
+            em.close();
+        }
+        return new PersonDTO(p);
     }
 
     @Override
@@ -140,6 +163,26 @@ public class PersonFacade implements IPersonFacade{
 
     @Override
     public PersonDTO deletePerson(Long id) {
+
+        //rækkefølge: phone, hobby_person, person, address
+
+            EntityManager em = emf.createEntityManager();
+            Person p = em.find(Person.class, id);
+            if(p == null){
+                throw new IllegalArgumentException("No person with that id: " + id + " exists");
+            }
+            try{
+                em.getTransaction().begin();
+                p.getPhones().forEach((phone)->em.remove(phone));
+                Address a = p.getAddress();
+                em.remove(p);
+                em.remove(a);
+
+                em.getTransaction().commit();
+            }finally {
+                em.close();
+            }
+
         return null;
     }
 

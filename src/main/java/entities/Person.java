@@ -147,6 +147,10 @@ public class Person {
         }
     }
 
+    public void removeHobbyFromPerson(Hobby hobby) {
+        hobbies.remove(hobby);
+//        hobby.getPeople().remove(this);
+    }
 
 
     @Override
@@ -161,4 +165,6 @@ public class Person {
                 ", hobbies=" + hobbies +
                 '}';
     }
+
+
 }

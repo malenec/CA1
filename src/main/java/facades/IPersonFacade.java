@@ -19,7 +19,7 @@ public interface IPersonFacade {
     public PersonDTO addHobbyToPerson(Long hobbyId, Long personId);
 
     //US7
-    public PersonDTO deleteHobbyFromPerson(PersonDTO person, int hobbyId);
+    public PersonDTO deleteHobbyFromPerson(Long hobbyId, Long personId);
 
     //US8
     public PersonDTO addPerson(PersonDTO person);
